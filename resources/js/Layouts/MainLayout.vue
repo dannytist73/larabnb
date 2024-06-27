@@ -8,7 +8,7 @@
                     <Link :href="route('listing.index')">Listings</Link>
                 </div>
                 <div class="text-xl text-indigo-600 dark:text-indigo-300">
-                    <Link :href="route('listing.index')">LaraBnb</Link>
+                    <Link :href="route('listing.index')">Ride Radar</Link>
                 </div>
                 <div class="text-lg">
                     <Link :href="route('listing.create')" class="btn-primary"

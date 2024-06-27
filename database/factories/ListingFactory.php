@@ -16,15 +16,25 @@ class ListingFactory extends Factory
      */
     public function definition(): array
     {
+        $year = $this->faker->numberBetween(2000, date('Y'));
+
+        $motorcycleModels = [
+            'Honda CBR500R', 'Kawasaki Ninja 650', 'Yamaha YZF-R3',
+            'Harley-Davidson Sportster', 'BMW S1000RR', 'Ducati Monster 821',
+            'Suzuki GSX-R750', 'Triumph Street Triple', 'KTM 1290 Super Duke R',
+            'Indian Scout', 'Aprilia RSV4', 'Moto Guzzi V7', 'Royal Enfield Interceptor 650'
+        ];
+
         return [
-            'beds' => fake()->numberBetween(1, 7),
-            'baths' => fake()->numberBetween(1, 7),
-            'area' => fake()->numberBetween(30, 400),
-            'city' => fake()->city(),
-            'code' => fake()->postcode(),
-            'street' => fake()->streetName(),
-            'street_nr' => fake()->numberBetween(10, 200),
-            'price' => fake()->numberBetween(50_000, 2_000_000)
+            'year' => $year,
+            'mileage' => $this->faker->numberBetween(1000, 50000),
+            'name' => $this->faker->randomElement($motorcycleModels),
+            'brand' => $this->faker->randomElement(['Honda', 'KTM', 'Kawasaki', 'Yamaha', 'Harley-Davidson', 'BMW']),
+            'engine_size' => $this->faker->randomElement(['500cc', '750cc', '1000cc', '1290cc']),
+            'color' => $this->faker->safeColorName,
+            'location' => $this->faker->city,
+            'seller_contact' => $this->faker->email,
+            'price' => $this->faker->randomFloat(2, 100000, 5000000),
         ];
     }
 }

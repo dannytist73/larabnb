@@ -23,14 +23,15 @@ class ListingController extends Controller
     public function store(Request $request)
     {
         Listing::create($request->validate([
-                "beds" => "required|integer|min:1|max:20",
-                'baths' => "required|integer|min:1|max:20",
-                'area' => "required|integer|min:15|max:1500",
-                'city' => "required",
-                'code' => "required",
-                'street' => "required",
-                'street_nr' => "required|min:1|max:1000",
-                'price' => "required|integer|min:1|max:20000000",
+                "year" => "required|integer|min:1990|max:2024",
+            'mileage' => "required|integer|min:1|max:50000",
+            'name' => "required",
+            'brand' => "required",
+            'engine_size' => "required",
+            'color' => "required",
+            'location' => "required",
+            'seller_contact' => "required",
+            'price' => "required|integer|min:1|max:20000000",
             ])
         );
         return redirect()->route('listing.index')
@@ -55,13 +56,14 @@ class ListingController extends Controller
     {
         $listing->update(
             $request->validate([
-            "beds" => "required|integer|min:1|max:20",
-            'baths' => "required|integer|min:1|max:20",
-            'area' => "required|integer|min:15|max:1500",
-            'city' => "required",
-            'code' => "required",
-            'street' => "required",
-            'street_nr' => "required|min:1|max:1000",
+            "year" => "required|integer|min:1990|max:2024",
+            'mileage' => "required|integer|min:1|max:50000",
+            'name' => "required",
+            'brand' => "required",
+            'engine_size' => "required",
+            'color' => "required",
+            'location' => "required",
+            'seller_contact' => "required",
             'price' => "required|integer|min:1|max:20000000",
         ])
     );

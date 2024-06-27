@@ -2,14 +2,15 @@
 import { useForm } from "@inertiajs/vue3";
 
 const form = useForm({
-    beds: 0,
-    baths: 0,
-    area: 0,
-    city: "",
-    code: "",
-    street: "",
-    street_nr: 0,
+    year: 0,
     price: 0,
+    mileage: 0,
+    name: "",
+    brand: "",
+    engine_size: "",
+    color: "",
+    location: "",
+    seller_contact: "",
 });
 
 const create = () => form.post(route("listing.store"));
@@ -19,58 +20,70 @@ const create = () => form.post(route("listing.store"));
     <form @submit.prevent="create">
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-2">
-                <label class="label">Beds</label>
-                <input type="number" v-model="form.beds" class="input" />
-                <div v-if="form.errors.beds" class="input-error">
-                    {{ form.errors.beds }}
+                <label class="label">Year Model</label>
+                <input type="number" v-model="form.year" class="input" />
+                <div v-if="form.errors.year" class="input-error">
+                    {{ form.errors.year }}
                 </div>
             </div>
 
             <div class="col-span-2">
-                <label class="label">Baths</label>
-                <input type="number" v-model="form.baths" class="input" />
-                <div v-if="form.errors.baths" class="input-error">
-                    {{ form.errors.baths }}
+                <label class="label">Mileage</label>
+                <input type="number" v-model="form.mileage" class="input" />
+                <div v-if="form.errors.mileage" class="input-error">
+                    {{ form.errors.mileage }}
                 </div>
             </div>
 
             <div class="col-span-2">
-                <label class="label">Area</label>
-                <input type="number" v-model="form.area" class="input" />
-                <div v-if="form.errors.area" class="input-error">
-                    {{ form.errors.area }}
+                <label class="label">Brand</label>
+                <input type="text" v-model="form.brand" class="input" />
+                <div v-if="form.errors.brand" class="input-error">
+                    {{ form.errors.brand }}
+                </div>
+            </div>
+
+            <div class="col-span-2">
+                <label class="label">Motorcycle name</label>
+                <input type="text" v-model="form.name" class="input" />
+                <div v-if="form.errors.name" class="input-error">
+                    {{ form.errors.name }}
+                </div>
+            </div>
+
+            <div class="col-span-2">
+                <label class="label">Engine Size</label>
+                <input type="text" v-model="form.engine_size" class="input" />
+                <div v-if="form.errors.engine_size" class="input-error">
+                    {{ form.errors.engine_size }}
+                </div>
+            </div>
+
+            <div class="col-span-2">
+                <label class="label">Color</label>
+                <input type="text" v-model="form.color" class="input" />
+                <div v-if="form.errors.color" class="input-error">
+                    {{ form.errors.color }}
                 </div>
             </div>
 
             <div class="col-span-4">
-                <label class="label">City</label>
-                <input type="text" v-model="form.city" class="input" />
-                <div v-if="form.errors.city" class="input-error">
-                    {{ form.errors.city }}
+                <label class="label">Location</label>
+                <input type="text" v-model="form.location" class="input" />
+                <div v-if="form.errors.location" class="input-error">
+                    {{ form.errors.location }}
                 </div>
             </div>
 
             <div class="col-span-2">
-                <label class="label">Post Code</label>
-                <input type="text" v-model="form.code" class="input" />
-                <div v-if="form.errors.code" class="input-error">
-                    {{ form.errors.code }}
-                </div>
-            </div>
-
-            <div class="col-span-4">
-                <label class="label">Street</label>
-                <input type="text" v-model="form.street" class="input" />
-                <div v-if="form.errors.street" class="input-error">
-                    {{ form.errors.street }}
-                </div>
-            </div>
-
-            <div class="col-span-2">
-                <label class="label">Street Nr</label>
-                <input type="number" v-model="form.street_nr" class="input" />
-                <div v-if="form.errors.street_nr" class="input-error">
-                    {{ form.errors.street_nr }}
+                <label class="label">Seller Contact</label>
+                <input
+                    type="text"
+                    v-model="form.seller_contact"
+                    class="input"
+                />
+                <div v-if="form.errors.seller_contact" class="input-error">
+                    {{ form.errors.seller_contact }}
                 </div>
             </div>
 
@@ -88,5 +101,3 @@ const create = () => form.post(route("listing.store"));
         </div>
     </form>
 </template>
-
-<style scoped></style>
