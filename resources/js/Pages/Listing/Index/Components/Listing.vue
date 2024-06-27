@@ -4,11 +4,16 @@ import ListingBike from "@/Components/ListingBike.vue";
 import Price from "@/Components/Price.vue";
 import Box from "@/Components/UI/Box.vue";
 import { Link } from "@inertiajs/vue3";
+import { usePage } from "@inertiajs/vue3";
+import { computed } from "vue";
 
 import { useMonthlyPayment } from "@/Composables/useMonthlyPayment";
 
 const props = defineProps({ listing: Object });
 const { monthlyPayment } = useMonthlyPayment(props.listing.price, 2.5, 25);
+
+const page = usePage();
+const user = computed(() => page.props.user);
 </script>
 
 <template>
@@ -27,15 +32,23 @@ const { monthlyPayment } = useMonthlyPayment(props.listing.price, 2.5, 25);
                 </div>
             </Link>
         </div>
-        <div>
-            <Link :href="route('listing.edit', listing.id)">Edit</Link>
-        </div>
-        <div>
+        <div class="flex items-center gap-4" v-if="user">
+            <Link class="btn-edit" :href="route('listing.edit', listing.id)"
+                >Edit</Link
+            >
             <Link
                 :href="route('listing.destroy', listing.id)"
                 method="delete"
                 as="button"
+                class="btn-delete"
                 >Delete</Link
+            >
+        </div>
+        <div v-else>
+            <Link
+                :href="route('login')"
+                class="italic text-indigo-300 hover:text-indigo-400"
+                >Sign in to view more...</Link
             >
         </div>
     </Box>
