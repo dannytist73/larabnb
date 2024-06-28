@@ -20,36 +20,26 @@ const user = computed(() => page.props.user);
     <Box>
         <div>
             <Link :href="route('listing.show', listing.id)">
-                <ListingBike :listing="listing" class="text-lg" />
-                <Price :price="listing.price" class="text-2xl font-bold" />
-                <ListingDetail :listing="listing" />
-                <div class="flex mt-2 mb-3 items-center">
-                    <div class="text-xs text-gray-300">
-                        <b
-                            >Monthly Payments: <Price :price="monthlyPayment"
-                        /></b>
-                    </div>
+            <ListingBike :listing="listing" class="text-lg" />
+            <Price :price="listing.price" class="text-2xl font-bold" />
+            <ListingDetail :listing="listing" />
+            <div class="flex mt-2 mb-3 items-center">
+                <div class="text-xs text-gray-500 dark:text-gray-300">
+                    <b>Monthly Payments:
+                        <Price :price="monthlyPayment" />
+                    </b>
                 </div>
+            </div>
             </Link>
         </div>
         <div class="flex items-center gap-4" v-if="user">
-            <Link class="btn-edit" :href="route('listing.edit', listing.id)"
-                >Edit</Link
-            >
-            <Link
-                :href="route('listing.destroy', listing.id)"
-                method="delete"
-                as="button"
-                class="btn-delete"
-                >Delete</Link
-            >
+            <Link class="btn-edit" :href="route('listing.edit', listing.id)">Edit</Link>
+            <Link :href="route('listing.destroy', listing.id)" method="delete" as="button" class="btn-delete">Delete
+            </Link>
         </div>
         <div v-else>
-            <Link
-                :href="route('login')"
-                class="italic text-indigo-300 hover:text-indigo-400"
-                >Sign in to view more...</Link
-            >
+            <Link :href="route('login')" class="italic text-indigo-300 hover:text-indigo-400">Sign in to view more...
+            </Link>
         </div>
     </Box>
 </template>
