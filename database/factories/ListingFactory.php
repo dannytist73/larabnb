@@ -30,7 +30,7 @@ class ListingFactory extends Factory
             'mileage' => $this->faker->numberBetween(1000, 50000),
             'name' => $this->faker->randomElement($motorcycleModels),
             'brand' => $this->faker->randomElement(['Honda', 'KTM', 'Kawasaki', 'Yamaha', 'Harley-Davidson', 'BMW']),
-            'engine_size' => $this->faker->randomElement(['500cc', '750cc', '1000cc', '1290cc']),
+            'engine_size' => $this->faker->randomElement(['125cc', '200cc', '500cc', '750cc', '1000cc', '1290cc']),
             'color' => $this->faker->safeColorName,
             'location' => $this->faker->city,
             'seller_contact' => $this->faker->email,

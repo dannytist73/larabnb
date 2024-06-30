@@ -18,10 +18,18 @@ class ListingController extends \Illuminate\Routing\Controller
         $this->middleware('auth')->except(['index', 'show']);
         $this->authorizeResource(Listing::class, 'listing');
     }
-    public function index()
+    public function index(Request $request)
     {
+        $filters = $request->only([
+                'priceFrom', 'priceTo', 'brand', 'engine', 'mileage', 'location'
+        ]);
+
         return inertia('Listing/Index', [
-            'listings' => Listing::all()
+            'filters' => $filters,
+            'listings' => Listing::mostRecent()
+                ->filter($filters)
+                ->paginate(10)
+                ->withQueryString()
         ]);
     }
 

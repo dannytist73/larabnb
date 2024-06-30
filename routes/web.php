@@ -4,6 +4,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SellerListingController;
 use App\Http\Controllers\UserAccountController;
 
 Route::get('/', [IndexController::class, 'index']);
@@ -21,3 +22,11 @@ Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
 
 Route::resource('user-account', UserAccountController::class)
     ->only(['create', 'store']);
+
+Route::prefix('seller')
+  ->name('seller.')
+  ->middleware('auth')
+  ->group(function () {
+    // routes here
+    Route::resource('listing', SellerListingController::class);
+  });

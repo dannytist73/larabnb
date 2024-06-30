@@ -18,11 +18,15 @@ const user = computed(() => page.props.user);
                 <div class="text-lg font-medium">
                     <Link :href="route('listing.index')">Listings</Link>
                 </div>
-                <div class="text-xl text-indigo-600 dark:text-indigo-300">
-                    <Link :href="route('listing.index')">Ride Radar</Link>
+                <div class="text-xl text-gray-600 dark:text-gray-300">
+                    <Link :href="route('listing.index')">RideRadar</Link>
                 </div>
                 <div class="flex items-center gap-4" v-if="user">
-                    <div class="text-gray-500">{{ user.name }}</div>
+                    <Link
+                        class="text-gray-500"
+                        :href="route('seller.listing.index')"
+                        >{{ user.name }}</Link
+                    >
                     <Link :href="route('listing.create')" class="btn-primary"
                         >+ New Listing</Link
                     >
