@@ -21,7 +21,12 @@ class ListingController extends \Illuminate\Routing\Controller
     public function index(Request $request)
     {
         $filters = $request->only([
-                'priceFrom', 'priceTo', 'brand', 'engine', 'mileage', 'location'
+            'priceFrom',
+            'priceTo',
+            'brand',
+            'engine',
+            'mileage',
+            'location'
         ]);
 
         return inertia('Listing/Index', [

@@ -34,8 +34,6 @@ const user = computed(() => page.props.user);
         </div>
         <div class="flex items-center gap-4" v-if="user">
             <Link class="btn-edit" :href="route('listing.edit', listing.id)">Edit</Link>
-            <Link :href="route('listing.destroy', listing.id)" method="delete" as="button" class="btn-delete">Delete
-            </Link>
         </div>
         <div v-else>
             <Link :href="route('login')" class="italic text-indigo-300 hover:text-indigo-400">Sign in to view more...
