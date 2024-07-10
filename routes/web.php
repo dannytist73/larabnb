@@ -5,6 +5,7 @@ use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SellerListingController;
+use App\Http\Controllers\SellerListingImageController;
 use App\Http\Controllers\UserAccountController;
 
 Route::get('/', [IndexController::class, 'index']);
@@ -31,4 +32,7 @@ Route::prefix('seller')
     Route::resource('listing', SellerListingController::class)
       ->only(['index', 'destroy', 'edit', 'update', 'create', 'store'])
       ->withTrashed();
+
+    Route::resource('listing.image', SellerListingImageController::class)
+      ->only(['create', 'store']);
   });
