@@ -13,7 +13,7 @@ const form = useForm({
     seller_contact: "",
 });
 
-const create = () => form.post(route("listing.store"));
+const create = () => form.post(route("seller.listing.store"));
 </script>
 
 <template>

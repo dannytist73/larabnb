@@ -17,7 +17,7 @@ const form = useForm({
     seller_contact: props.listing.seller_contact,
 });
 
-const update = () => form.put(route("listing.update", props.listing.id));
+const update = () => form.put(route("seller.listing.update", props.listing.id));
 </script>
 
 <template>
@@ -105,13 +105,3 @@ const update = () => form.put(route("listing.update", props.listing.id));
         </div>
     </form>
 </template>
-
-<style scoped>
-label {
-    margin-right: 2em;
-}
-
-div {
-    padding: 2px;
-}
-</style>
