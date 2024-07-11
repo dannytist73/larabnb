@@ -9,32 +9,48 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ListingFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $motorcycles = [
+        'Honda' => [
+            ['name' => 'CBR500R', 'engine_size' => '500cc', 'colors' => ['Grand Prix Red', 'Matt Gunpowder Black Metallic'], 'price_range' => [350000, 400000]],
+            ['name' => 'CB650R', 'engine_size' => '650cc', 'colors' => ['Candy Chromosphere Red', 'Matt Gunpowder Black Metallic'], 'price_range' => [450000, 500000]],
+        ],
+        'Kawasaki' => [
+            ['name' => 'Ninja 650', 'engine_size' => '650cc', 'colors' => ['Lime Green', 'Metallic Spark Black'], 'price_range' => [400000, 450000]],
+            ['name' => 'Z900', 'engine_size' => '900cc', 'colors' => ['Metallic Spark Black/Metallic Flat Spark Black', 'Candy Lime Green/Metallic Spark Black'], 'price_range' => [550000, 600000]],
+        ],
+        'Yamaha' => [
+            ['name' => 'YZF-R3', 'engine_size' => '321cc', 'colors' => ['Racing Blue', 'Midnight Black'], 'price_range' => [250000, 300000]],
+            ['name' => 'MT-09', 'engine_size' => '890cc', 'colors' => ['Icon Blue', 'Tech Black'], 'price_range' => [600000, 650000]],
+        ],
+        'Harley-Davidson' => [
+            ['name' => 'Iron 883', 'engine_size' => '883cc', 'colors' => ['Black Denim', 'Barracuda Silver'], 'price_range' => [700000, 750000]],
+            ['name' => 'Street Glide', 'engine_size' => '1745cc', 'colors' => ['Vivid Black', 'Billiard Red'], 'price_range' => [1500000, 1600000]],
+        ],
+        'BMW' => [
+            ['name' => 'S1000RR', 'engine_size' => '999cc', 'colors' => ['Racing Red', 'Light White/Lupin Blue Metallic/Racing Red'], 'price_range' => [1200000, 1300000]],
+            ['name' => 'R1250GS', 'engine_size' => '1254cc', 'colors' => ['Black Storm Metallic', 'Ice Grey'], 'price_range' => [1300000, 1400000]],
+        ],
+        'KTM' => [
+            ['name' => '390 Duke', 'engine_size' => '373cc', 'colors' => ['Orange', 'White'], 'price_range' => [300000, 350000]],
+            ['name' => '1290 Super Duke R', 'engine_size' => '1301cc', 'colors' => ['Orange', 'Black'], 'price_range' => [1100000, 1200000]],
+        ],
+    ];
+
     public function definition(): array
     {
-        $year = $this->faker->numberBetween(2000, date('Y'));
-
-        $motorcycleModels = [
-            'Honda CBR500R', 'Kawasaki Ninja 650', 'Yamaha YZF-R3',
-            'Harley-Davidson Sportster', 'BMW S1000RR', 'Ducati Monster 821',
-            'Suzuki GSX-R750', 'Triumph Street Triple', 'KTM 1290 Super Duke R',
-            'Indian Scout', 'Aprilia RSV4', 'Moto Guzzi V7', 'Royal Enfield Interceptor 650'
-        ];
+        $brand = $this->faker->randomElement(array_keys($this->motorcycles));
+        $model = $this->faker->randomElement($this->motorcycles[$brand]);
 
         return [
-            'year' => $year,
+            'year' => $this->faker->numberBetween(2018, date('Y')),
             'mileage' => $this->faker->numberBetween(1000, 50000),
-            'name' => $this->faker->randomElement($motorcycleModels),
-            'brand' => $this->faker->randomElement(['Honda', 'KTM', 'Kawasaki', 'Yamaha', 'Harley-Davidson', 'BMW']),
-            'engine_size' => $this->faker->randomElement(['125cc', '200cc', '500cc', '750cc', '1000cc', '1290cc']),
-            'color' => $this->faker->safeColorName,
+            'name' => $model['name'],
+            'brand' => $brand,
+            'engine_size' => $model['engine_size'],
+            'color' => $this->faker->randomElement($model['colors']),
             'location' => $this->faker->city,
             'seller_contact' => $this->faker->email,
-            'price' => $this->faker->randomFloat(2, 100000, 5000000),
+            'price' => $this->faker->numberBetween($model['price_range'][0], $model['price_range'][1]),
         ];
     }
 }

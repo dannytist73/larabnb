@@ -45,6 +45,7 @@ class ListingController extends \Illuminate\Routing\Controller
         // }
 
         //$this->authorize('view', $listing);
+        $listing->load(['images']);
         return inertia('Listing/Show', [
             'listing' => $listing
         ]);

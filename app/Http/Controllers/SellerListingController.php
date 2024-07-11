@@ -30,6 +30,7 @@ class SellerListingController extends \Illuminate\Routing\Controller
                 'listings' => Auth::user()
                     ->listings()
                     ->filter($filters)
+                    ->withCount('images')
                     ->paginate(5)
                     ->withQueryString()
             ]
@@ -94,7 +95,8 @@ class SellerListingController extends \Illuminate\Routing\Controller
         return redirect()->back()->with('success', 'Successfully deleted the listing.');
     }
 
-    public function restore(Listing $listing) {
+    public function restore(Listing $listing)
+    {
         $listing->restore();
 
         return redirect()->back()->with('success', 'Successfully restored the listing!');

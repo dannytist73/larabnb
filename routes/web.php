@@ -34,5 +34,5 @@ Route::prefix('seller')
       ->withTrashed();
 
     Route::resource('listing.image', SellerListingImageController::class)
-      ->only(['create', 'store']);
+      ->only(['create', 'store', 'destroy']);
   });
