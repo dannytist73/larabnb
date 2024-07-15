@@ -4,6 +4,9 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ListingOfferController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\SellerListingAcceptOfferController;
 use App\Http\Controllers\SellerListingController;
 use App\Http\Controllers\SellerListingImageController;
 use App\Http\Controllers\UserAccountController;
@@ -13,6 +16,14 @@ Route::get('/hello', [IndexController::class, 'show'])->middleware('auth');
 
 Route::resource('listing', ListingController::class)
   ->only(['index', 'show']);
+
+Route::resource('listing.offer', ListingOfferController::class)
+  ->middleware('auth')
+  ->only(['store']);
+
+Route::resource('notification', NotificationController::class)
+  ->middleware('auth')
+  ->only(['index']);
 
 Route::get('login', [AuthController::class, 'create'])->name('login');
 Route::post('login', [AuthController::class, 'store'])->name('login.store');
@@ -30,8 +41,13 @@ Route::prefix('seller')
       [SellerListingController::class, 'restore']
     )->withTrashed();
     Route::resource('listing', SellerListingController::class)
-      ->only(['index', 'destroy', 'edit', 'update', 'create', 'store'])
       ->withTrashed();
+
+      Route::name('offer.accept')
+        ->put(
+          'offer/{offer}/accept', 
+          SellerListingAcceptOfferController::class
+      );
 
     Route::resource('listing.image', SellerListingImageController::class)
       ->only(['create', 'store', 'destroy']);

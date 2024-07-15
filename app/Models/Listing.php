@@ -31,6 +31,10 @@ class Listing extends Model
         'created_at'
     ];
 
+    public function offers(): HasMany {
+        return $this->hasMany(Offer::class, 'listing_id');
+    }
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(
@@ -82,5 +86,16 @@ class Listing extends Model
                 !in_array($value, $this->sortable) ? $query :
                 $query->orderBy($value, $filters['order'] ?? 'desc')
             );
+    }
+
+    public function scopeWithoutSold(Builder $query) : Builder {
+        // return $query->doesntHave('offers')
+        //     ->orWhereHas(
+        //         'offers', 
+        //         fn(Builder $query) => $query->whereNull('accepted_at')
+        //             ->whereNull('rejected_at')
+        //     );
+
+        return $query->whereNull('sold_at');
     }
 }

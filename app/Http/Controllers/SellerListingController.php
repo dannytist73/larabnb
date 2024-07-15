@@ -31,9 +31,17 @@ class SellerListingController extends \Illuminate\Routing\Controller
                     ->listings()
                     ->filter($filters)
                     ->withCount('images')
+                    ->withCount('offers')
                     ->paginate(5)
                     ->withQueryString()
             ]
+        );
+    }
+
+    public function show(Listing $listing) {
+        return inertia(
+            'Seller/Show',
+            ['listing' => $listing->load('offers', 'offers.bidder')]
         );
     }
 

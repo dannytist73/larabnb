@@ -6,8 +6,8 @@ defineProps({
 
 <template>
     <div>
-        <b>{{ listing.seller_contact }}</b>
+        ✉️&nbsp;<b>{{ listing.seller_contact }}</b>
         <br />
-        Listed in {{ listing.location }}
+        📍&nbsp;Listed in {{ listing.location }}
     </div>
 </template>
