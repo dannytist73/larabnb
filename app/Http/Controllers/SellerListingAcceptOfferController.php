@@ -10,7 +10,8 @@ class SellerListingAcceptOfferController extends Controller
 {
     use AuthorizesRequests;
 
-    public function __invoke(Offer $offer) {
+    public function __invoke(Offer $offer)
+    {
 
         $listing = $offer->listing;
         $this->authorize('update', $listing);

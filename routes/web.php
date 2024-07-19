@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\NotificationViewsController;
 use App\Http\Controllers\SellerListingAcceptOfferController;
 use App\Http\Controllers\SellerListingController;
 use App\Http\Controllers\SellerListingImageController;
@@ -25,6 +26,11 @@ Route::resource('notification', NotificationController::class)
   ->middleware('auth')
   ->only(['index']);
 
+Route::put(
+  'notification/{notification}/seen',
+  NotificationViewsController::class
+)->middleware('auth')->name('notification.seen');
+
 Route::get('login', [AuthController::class, 'create'])->name('login');
 Route::post('login', [AuthController::class, 'store'])->name('login.store');
 Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
@@ -43,10 +49,10 @@ Route::prefix('seller')
     Route::resource('listing', SellerListingController::class)
       ->withTrashed();
 
-      Route::name('offer.accept')
-        ->put(
-          'offer/{offer}/accept', 
-          SellerListingAcceptOfferController::class
+    Route::name('offer.accept')
+      ->put(
+        'offer/{offer}/accept',
+        SellerListingAcceptOfferController::class
       );
 
     Route::resource('listing.image', SellerListingImageController::class)
